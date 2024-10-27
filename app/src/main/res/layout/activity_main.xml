@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/black"
+    android:padding="20dp"
+    >
+
+
+    <TextView
+        android:id="@+id/screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/value"
+        android:textStyle="bold"
+        android:textSize="60sp"
+        android:textColor="#FFFFFF"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="35sp"
+        android:layout_above="@+id/nums"
+
+        />
+
+    <LinearLayout
+        android:id="@+id/nums"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingTop="20dp"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
+            <Button style="@style/Button1" android:id="@+id/on" android:text="@string/on"/>
+            <Button style="@style/Button2" android:id="@+id/num7" android:text="7"/>
+            <Button style="@style/Button2" android:id="@+id/num4" android:text="4"/>
+            <Button style="@style/Button2" android:id="@+id/num1" android:text="1"/>
+            <Button style="@style/Button1" android:id="@+id/del" android:text="DEL"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
+            <Button style="@style/Button1" android:id="@+id/off" android:text="@string/off"/>
+            <Button style="@style/Button2" android:id="@+id/num8" android:text="@string/_8"/>
+            <Button style="@style/Button2" android:id="@+id/num5" android:text="@string/_5"/>
+            <Button style="@style/Button2" android:id="@+id/num2" android:text="@string/_2"/>
+            <Button style="@style/Button2" android:id="@+id/num0" android:text="@string/_0"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
+            <Button style="@style/Button1" android:id="@+id/ac" android:text="@string/ac"/>
+            <Button style="@style/Button2" android:id="@+id/num9" android:text="@string/_9"/>
+            <Button style="@style/Button2" android:id="@+id/num6" android:text="@string/_6"/>
+            <Button style="@style/Button2" android:id="@+id/num3" android:text="@string/_3"/>
+            <Button style="@style/Button2" android:id="@+id/dot" android:text="@string/_dot"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
+            <Button style="@style/Button1" android:id="@+id/div" android:text="@string/div"/>
+            <Button style="@style/Button1" android:id="@+id/times" android:text="@string/x"/>
+            <Button style="@style/Button1" android:id="@+id/min" android:text="@string/min"/>
+            <Button style="@style/Button1" android:id="@+id/plus" android:text="@string/plus"/>
+            <Button style="@style/Button1" android:id="@+id/equal" android:text="@string/equal"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

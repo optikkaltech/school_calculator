@@ -1,0 +1,175 @@
+### Package and Imports
+```java
+package com.example.calculator;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+```
+- `package com.example.calculator;` declares the package name.
+- The necessary Android packages and classes are imported, including `Button`, `TextView`, and `AppCompatActivity`.
+
+### MainActivity Class Definition
+```java
+public class MainActivity extends AppCompatActivity {
+```
+- The `MainActivity` class extends `AppCompatActivity`, making it the main activity for the application.
+
+### Variables
+```java
+double firstNum = 0;
+String operation;
+```
+- `firstNum` stores the first number in the arithmetic operation.
+- `operation` stores the current operation to be performed (`+`, `-`, `X`, `/`).
+
+### onCreate Method
+```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+```
+- `onCreate` is called when the activity is first created.
+- `setContentView` sets the layout for the activity.
+
+### Button Declarations
+```java
+Button num0 = findViewById(R.id.num0);
+Button num1 = findViewById(R.id.num1);
+// ... other number buttons
+
+Button on = findViewById(R.id.on);
+Button off = findViewById(R.id.off);
+Button ac = findViewById(R.id.ac);
+Button del = findViewById(R.id.del);
+Button div = findViewById(R.id.div);
+Button times = findViewById(R.id.times);
+Button min = findViewById(R.id.min);
+Button equal = findViewById(R.id.equal);
+Button plus = findViewById(R.id.plus);
+Button dot = findViewById(R.id.dot);
+
+TextView screen = findViewById(R.id.screen);
+```
+- Buttons for numbers (0-9) and operations (`on`, `off`, `ac`, `del`, `div`, `times`, `min`, `equal`, `plus`, `dot`) are initialized.
+- The `screen` TextView displays the numbers and results.
+
+### On/Off Button Functionality
+```java
+off.setOnClickListener(view -> screen.setVisibility(View.GONE));
+on.setOnClickListener(view -> {
+    screen.setVisibility(View.VISIBLE);
+    screen.setText("0");
+});
+```
+- `off` button hides the screen.
+- `on` button shows the screen and sets the initial text to "0".
+
+### Number Button Functionality
+```java
+ArrayList<Button> nums = new ArrayList<>();
+nums.add(num0);
+nums.add(num1);
+// ... other number buttons
+
+for (Button button : nums) {
+    button.setOnClickListener(view -> {
+        if (!screen.getText().toString().equals("0")) {
+            screen.setText(screen.getText().toString() + button.getText());
+        } else {
+            screen.setText(button.getText());
+        }
+    });
+}
+```
+- A list of number buttons is created and each button's `OnClickListener` is set.
+- When a number button is clicked, it appends the number to the screen unless the current screen text is "0".
+
+### Operation Button Functionality
+```java
+div.setOnClickListener(view -> handleOperation(screen, "/"));
+times.setOnClickListener(view -> handleOperation(screen, "X"));
+min.setOnClickListener(view -> handleOperation(screen, "-"));
+plus.setOnClickListener(view -> handleOperation(screen, "+"));
+```
+- Operation buttons (`div`, `times`, `min`, `plus`) set up to handle arithmetic operations.
+- The `handleOperation` method appends the operation to the screen.
+
+### Equal Button Functionality
+```java
+equal.setOnClickListener(view -> {
+    String[] parts = screen.getText().toString().split(" ");
+    if (parts.length < 3) return;
+    double firstNum = Double.parseDouble(parts[0]);
+    String operation = parts[1];
+    double secondNum = Double.parseDouble(parts[2]);
+
+    double result = 0;
+    switch (operation) {
+        case "+":
+            result = firstNum + secondNum;
+            break;
+        case "-":
+            result = firstNum - secondNum;
+            break;
+        case "X":
+            result = firstNum * secondNum;
+            break;
+        case "/":
+            result = firstNum / secondNum;
+            break;
+    }
+    screen.setText(String.valueOf(result));
+});
+```
+- `equal` button calculates the result of the arithmetic operation.
+- Splits the screen text into parts to get the first number, operation, and second number.
+- Performs the appropriate calculation based on the operation and displays the result.
+
+### Delete Button Functionality
+```java
+del.setOnClickListener(view -> {
+    String str = screen.getText().toString();
+    if (str.length() > 1) {
+        screen.setText(str.substring(0, str.length() - 1));
+    } else if (str.length() == 1 && !str.equals("0")) {
+        screen.setText("0");
+    }
+});
+```
+- `del` button deletes the last character from the screen text.
+- If the screen text is reduced to a single character, it sets the text to "0".
+
+### Dot Button Functionality
+```java
+dot.setOnClickListener(view -> {
+    if (!screen.getText().toString().contains(".")) {
+        screen.setText(screen.getText().toString() + ".");
+    }
+});
+```
+- `dot` button appends a decimal point to the screen text if it doesn't already contain one.
+
+### AC Button Functionality
+```java
+ac.setOnClickListener(view -> screen.setText("0"));
+```
+- `ac` button resets the screen text to "0".
+
+### handleOperation Method
+```java
+private void handleOperation(TextView screen, String operation) {
+    if (!screen.getText().toString().endsWith(" ")) {
+        screen.setText(screen.getText().toString() + " " + operation + " ");
+    }
+}
+```
+- `handleOperation` method appends the operation symbol to the screen text.
+- Ensures the operation symbol is not appended multiple times consecutively.
